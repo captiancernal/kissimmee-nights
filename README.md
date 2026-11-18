@@ -10,12 +10,14 @@ Satire: an Annual Pass with Saturday blackouts, virtual queues, peak food pricin
 
 The resort holds ten mini-games plus the full **BBA beer ball** league: 16 rated players, player cards, specials, house rules, floors and distractions, and **BBA Franchise** mode, with a draft, uniforms, a season, an All-Star Game, the playoffs, records and 21 awards.
 
+All 16 BBA players also live in the world as story characters. Each has their own voiced side mission built around their badge or special. They unlock as the main story moves forward and show up as pink dots on the map. Every player you meet becomes a contact on your **phone**. The phone also has texts, the radio, your properties, the BBA league and save backup.
+
 ## Play
 
 - **Online:** the GitHub Pages link for this repo, once Pages is turned on.
 - **Offline:** download `index.html` and open it in any browser. Everything is in that one file.
 
-Works on phones (touch) and computers (keyboard). Saves stay in the browser on that device.
+Works on phones (touch) and computers (keyboard). Saves stay in the browser on that device, along with an automatic backup from the previous in-game day. To move a save to another device, go to **Phone → Save backup**: copy a save code or download a `.json` file, then restore it on the other device.
 
 ## Layout
 

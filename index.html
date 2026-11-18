@@ -110,7 +110,7 @@ button:focus-visible{outline:3px solid var(--pool);outline-offset:2px}
     <div id="hudClock"></div>
     <div id="hudStars"></div>
     <div id="hudWpn"></div>
-    <div id="topBtns"><button id="bTaxi">Taxi</button><button id="bMap">Map</button><button id="bPause">Menu</button></div>
+    <div id="topBtns"><button id="bPhone">Phone</button><button id="bTaxi">Taxi</button><button id="bMap">Map</button><button id="bPause">Menu</button></div>
   </div>
   <div id="obj" class="hide"></div>
   <div id="prompt" class="hide"></div>
@@ -327,7 +327,7 @@ function buildMM(){MM=document.createElement('canvas');MM.width=(WW-WX0)*MK;MM.h
 /* ================= STATE ================= */
 const HOME={x:5640,y:2950};
 const P={x:HOME.x,y:HOME.y,a:PI,hp:100,armor:0,money:500,veh:null,own:{fist:1},ammo:{},cur:'fist',cd:0,dead:false,shirt:'#e8483f',hat:null,walk:0,swim:false,hit:0,look:{skin:2,build:1,hair:'short',hairC:0,top:'tee',topC:0,pants:0,hat:'none',hatC:6,acc:'none'}};
-const S={mode:'title',tod:18*60+30,day:6,heat:0,karma:0,done:{},gators:{},mission:null,sound:true,voice:true,drunk:0,t:0,showBonus:-1,cine:null,kills:0,jacked:0,evade:0,deadT:0,vMet:0,vFriend:0,vBite:0,own:{},job:{},medal:{},photos:{},dayN:0,flash:0,story:0,loudT:-1,epiT:0,beers:0,wasted:0,zyn:0,cause:'',mg:{},vault:0,bbG:0,bbF:'garage',bbS:{},bbR:{bo:1,drink:0,ice:0,sd:0,heck:1,dog:1,cat:1,mate:1,wind:1},bbK:{t:0,c:0},fr:null,bbV:0,bbX:1,bbM:1,shiftDay:{},dcast:0,props:{},radio:1,apass:0};
+const S={mode:'title',tod:18*60+30,day:6,heat:0,karma:0,done:{},gators:{},mission:null,sound:true,voice:true,drunk:0,t:0,showBonus:-1,cine:null,kills:0,jacked:0,evade:0,deadT:0,vMet:0,vFriend:0,vBite:0,own:{},job:{},medal:{},photos:{},dayN:0,flash:0,story:0,loudT:-1,epiT:0,beers:0,wasted:0,zyn:0,cause:'',mg:{},vault:0,bbG:0,bbF:'garage',bbS:{},bbR:{bo:1,drink:0,ice:0,sd:0,heck:1,dog:1,cat:1,mate:1,wind:1},bbK:{t:0,c:0},fr:null,bbV:0,bbX:1,bbM:1,shiftDay:{},dcast:0,props:{},radio:1,apass:0,texts:[],txs:{},crewMet:{}};
 const VEH=[],PED=[],PICK=[],TR=[],PT=[],FT=[];
 const CAM={x:HOME.x,y:HOME.y,z:1};
 let W=0,H=0,DPR=1,SPN=700,SPF=1200,touchMode=false;
@@ -371,7 +371,7 @@ const SKINS=['#f6d7bd','#f1c9a5','#e0ac82','#c68655','#9a623c','#6f4428'],HAIRC=
 const COLS=['#e8483f','#ff4f9a','#ff9a3c','#ffe14d','#9cff57','#19d3c5','#2f6bff','#b08bff','#f1efe6','#3c3c46','#111111','#7a5a3a'],PANTS=['#2b3a67','#3c3c46','#c9b38a','#111111','#f1efe6','#5d6b3a','#7a1f1f'],BUILDS=['Slim','Average','Broad'];
 const CAT={hair:[{id:'short',n:'Short'},{id:'bald',n:'Bald'},{id:'buzz',n:'Buzz cut'},{id:'long',n:'Long'},{id:'mohawk',n:'Mohawk'},{id:'afro',n:'Afro'},{id:'pony',n:'Ponytail'},{id:'bun',n:'Top bun'}],
 top:[{id:'tee',n:'T-shirt'},{id:'bba',n:'Beer ball jersey',how:'Win 3 games of beer ball at Grand Beach'},{id:'tank',n:'Tank top'},{id:'hawaii',n:'Hawaiian shirt',price:45},{id:'stripe',n:'Striped polo',price:40},{id:'hoodie',n:'Hoodie',price:60},{id:'jersey',n:'Jersey',price:70},{id:'suit',n:'Suit jacket',price:300},
- {id:'delivery',n:'Delivery polo',how:'Delivery level 3'},{id:'scrubs',n:'Scrubs',how:'Paramedic level 3'},{id:'deputy',n:'Deputy uniform',how:'Deputy level 3'},{id:'boxer',n:'Ring shorts',how:'Win the Friday Night Fights'},{id:'racer',n:'Racing suit',how:'Gold in all four street races'},{id:'armor',n:'Knight’s armor',how:'Finish “A Knight Off”'},{id:'gatorsuit',n:'Gator suit',how:'Find every golden gator'},{id:'tux',n:'White tux',how:'Finish every Strangers and Freaks mission'},{id:'robe',n:'Dean’s gown',how:'Finish the main story'},{id:'apron',n:'Dishwasher’s apron',how:'???'}],
+ {id:'delivery',n:'Delivery polo',how:'Delivery level 3'},{id:'scrubs',n:'Scrubs',how:'Paramedic level 3'},{id:'deputy',n:'Deputy uniform',how:'Deputy level 3'},{id:'boxer',n:'Ring shorts',how:'Win the Friday Night Fights'},{id:'racer',n:'Racing suit',how:'Gold in all four street races'},{id:'armor',n:'Knight’s armor',how:'Finish “A Knight Off”'},{id:'gatorsuit',n:'Gator suit',how:'Find every golden gator'},{id:'tux',n:'White tux',how:'Finish every Strangers and Freaks mission'},{id:'robe',n:'Dean’s gown',how:'Finish the main story'},{id:'apron',n:'Dishwasher’s apron',how:'???'},{id:'bbaall',n:'BBA Association jersey',how:'Meet all 16 BBA players'}],
 hat:[{id:'none',n:'No hat'},{id:'cap',n:'Ball cap',price:30},{id:'visor',n:'Sun visor',price:25},{id:'bucket',n:'Bucket hat',price:35},{id:'beanie',n:'Beanie',price:30},{id:'cowboy',n:'Cowboy hat',price:80},{id:'ears',n:'Mouse ears',price:30},{id:'wizard',n:'Wizard hat',price:45},{id:'safari',n:'Safari hat',price:35},
  {id:'chef',n:'Chef’s toque',how:'Delivery level 3'},{id:'surgeon',n:'Scrub cap',how:'Paramedic level 3'},{id:'deputy',n:'Deputy hat',how:'Deputy level 3'},{id:'luchador',n:'Luchador mask',how:'Win the Friday Night Fights'},{id:'helmet',n:'Racing helmet',how:'Gold in any street race'},{id:'kart',n:'Kart helmet',how:'Finish the go-kart trial'},{id:'captain',n:'Captain’s hat',how:'Finish the Lake Toho airboat run'},{id:'knight',n:'Knight’s helm',how:'Finish “A Knight Off”'},{id:'manatee',n:'Manatee head',how:'Tell Mikey you’re keeping it'},{id:'gator',n:'Gator head',how:'Find 10 golden gators'},{id:'crown',n:'Swamp crown',how:'Find every golden gator'},{id:'mortar',n:'Mortarboard',how:'Finish the main story'},{id:'fedora',n:'Rum Vault fedora',how:'Clear level 8 of the Rum Vault'},{id:'spider',n:'Eight-eyed cap',how:'???'}],
 acc:[{id:'none',n:'Nothing'},{id:'lei',n:'Lei',price:20},{id:'backpack',n:'Backpack',price:40},{id:'chain',n:'Gold chain',price:150},{id:'tote',n:'Timeshare tote bag',how:'Finish Terry’s mission'},{id:'gloves',n:'Boxing gloves',how:'Win the Friday Night Fights'},{id:'camera',n:'Camera',how:'Collect every postcard'},{id:'medal',n:'Gold medal',how:'Gold in all four street races'},{id:'cape',n:'Cape',how:'Finish every Strangers and Freaks mission'},{id:'poms',n:'Cheer pom-poms',how:'Make a late-night squatch call from Tower B'}]};
@@ -384,7 +384,7 @@ function drawHero(g,L,x,y,a,walk,o){o=o||{};g.save();g.translate(x,y);g.rotate(a
   const skin=SKINS[L.skin],tc=COLS[L.topC],T=L.top,sw=Math.sin(walk)*4,hc=HAIRC[L.hairC],kc=COLS[L.hatC];
   const el=(cx,cy,rx,ry,c)=>{g.fillStyle=c;g.beginPath();g.ellipse(cx,cy,rx,ry,0,0,TAU);g.fill()};
   if(o.dead){el(0,0,13,9,'rgba(120,10,25,.55)');g.globalAlpha=.85}
-  const FIX={bba:'#19d3c5',robe:'#1b1b2b',scrubs:'#3fb8af',deputy:'#4d5d3a',racer:'#f1efe6',delivery:'#c2182b',armor:'#9aa0a8',gatorsuit:'#2f8a3c',tux:'#f1efe6'};
+  const FIX={bba:'#19d3c5',bbaall:'#ff4f9a',robe:'#1b1b2b',scrubs:'#3fb8af',deputy:'#4d5d3a',racer:'#f1efe6',delivery:'#c2182b',armor:'#9aa0a8',gatorsuit:'#2f8a3c',tux:'#f1efe6'};
   if(o.swim){el(0,0,10+Math.sin(walk)*2,10+Math.sin(walk)*2,'rgba(255,255,255,.5)')}
   else{const tw=8.5*bw,ay=7.6*bw,body=T==='boxer'?skin:FIX[T]||tc,sleeve=T==='tank'||T==='boxer'?null:FIX[T]||tc;
     if(!o.dead){el(sw*.9,-3.2*bw,3.4,2.3,PANTS[L.pants]);el(-sw*.9,3.2*bw,3.4,2.3,PANTS[L.pants])}
@@ -400,6 +400,7 @@ function drawHero(g,L,x,y,a,walk,o){o=o||{};g.save();g.translate(x,y);g.rotate(a
     if(T==='tank'){el(0,-tw+1.6,2.6,1.9,skin);el(0,tw-1.6,2.6,1.9,skin)}
     else if(T==='hawaii'){for(const q of[[-2,-5],[2,-2],[-1,1],[2,4],[-2,5.5],[1,-6]])el(q[0],q[1]*bw,1,1,(q[0]+q[1])%2?'#fff':'#ffe14d')}
     else if(T==='stripe'){g.fillStyle='#fff';g.fillRect(-2.6,-tw*.8,1.3,tw*1.6);g.fillRect(.6,-tw*.8,1.3,tw*1.6)}
+    else if(T==='bbaall'){g.fillStyle='#ffe14d';g.fillRect(-2.4,-3,4,6);g.fillStyle='#151226';g.fillRect(-1.2,-1.5,1.6,3)}
     else if(T==='jersey'||T==='bba'){g.fillStyle='#fff';g.fillRect(-2.4,-3,4,6)}
     else if(T==='suit'||T==='tux'){g.fillStyle=T==='suit'?'#f1efe6':'#111';g.fillRect(1.2,-1.2,3.4,2.4);g.fillStyle=T==='suit'?'#c2182b':'#111';g.fillRect(2,-.6,2.6,1.2)}
     else if(T==='robe'){g.fillStyle='#ffcc33';g.fillRect(.6,-tw*.75,1.2,tw*1.5)}else if(T==='apron'){el(1.6,0,3.1,tw*.7,'#f1efe6')}
@@ -463,9 +464,9 @@ function closeMenu(){if(RG.on&&RG.pause){mgResume();return}$('menu').classList.a
 const backItem={label:'Back to the street',fn:closeMenu};
 
 /* ================= SAVE ================= */
-const SK='kissimmee_nights_v1';
-function save(){try{localStorage.setItem(SK,JSON.stringify({m:P.money,hp:P.hp,ar:P.armor,own:P.own,ammo:P.ammo,cur:P.cur,shirt:P.shirt,hat:P.hat,tod:S.tod,day:S.day,karma:S.karma,done:S.done,gators:S.gators,kills:S.kills,jacked:S.jacked,vMet:S.vMet,vFriend:S.vFriend,vBite:S.vBite,look:P.look,wown:S.own,job:S.job,medal:S.medal,photos:S.photos,dayN:S.dayN,story:S.story,beers:S.beers,wasted:S.wasted,zyn:S.zyn,mg:S.mg,vault:S.vault,bbG:S.bbG,bbF:S.bbF,bbS:S.bbS,bbR:S.bbR,bbK:S.bbK,fr:S.fr,bbV:S.bbV,bbX:S.bbX,bbM:S.bbM,shiftDay:S.shiftDay,dcast:S.dcast,props:S.props,radio:S.radio,apass:S.apass}));return true}catch(e){return false}}
-function load(){try{const d=JSON.parse(localStorage.getItem(SK));if(!d)return false;P.money=d.m;P.hp=d.hp||100;P.armor=d.ar||0;P.own=d.own||{fist:1};P.ammo=d.ammo||{};P.cur=d.cur||'fist';P.shirt=d.shirt||P.shirt;P.hat=d.hat||null;S.tod=d.tod;S.day=d.day;S.karma=d.karma||0;S.done=d.done||{};S.gators=d.gators||{};S.kills=d.kills||0;S.jacked=d.jacked||0;S.vMet=d.vMet||0;S.vFriend=d.vFriend||0;S.vBite=d.vBite||0;if(d.look)Object.assign(P.look,d.look);S.own=d.wown||{};S.job=d.job||{};S.medal=d.medal||{};S.photos=d.photos||{};S.dayN=d.dayN||0;S.story=d.story||0;S.beers=d.beers||0;S.wasted=d.wasted||0;S.zyn=d.zyn||0;S.mg=d.mg||{};S.vault=d.vault||0;S.bbG=d.bbG||0;S.bbF=d.bbF||'garage';S.bbS=d.bbS||{};S.bbR=Object.assign({bo:1,drink:0,ice:0,sd:0,heck:1,dog:1,cat:1,mate:1,wind:1},d.bbR||{});S.bbK=Object.assign({t:0,c:0},d.bbK||{});S.fr=d.fr||null;S.bbV=d.bbV?1:0;S.bbX=d.bbX===0?0:1;S.bbM=d.bbM===0?0:1;S.shiftDay=d.shiftDay||{};S.dcast=d.dcast||0;S.props=d.props||{};S.radio=d.radio===undefined?1:d.radio;S.apass=d.apass||0;return true}catch(e){return false}}
+const SK='kissimmee_nights_v1',SAVEV=3;
+function save(){try{saveBak();localStorage.setItem(SK,JSON.stringify({m:P.money,hp:P.hp,ar:P.armor,own:P.own,ammo:P.ammo,cur:P.cur,shirt:P.shirt,hat:P.hat,tod:S.tod,day:S.day,karma:S.karma,done:S.done,gators:S.gators,kills:S.kills,jacked:S.jacked,vMet:S.vMet,vFriend:S.vFriend,vBite:S.vBite,look:P.look,wown:S.own,job:S.job,medal:S.medal,photos:S.photos,dayN:S.dayN,story:S.story,beers:S.beers,wasted:S.wasted,zyn:S.zyn,mg:S.mg,vault:S.vault,bbG:S.bbG,bbF:S.bbF,bbS:S.bbS,bbR:S.bbR,bbK:S.bbK,fr:S.fr,bbV:S.bbV,bbX:S.bbX,bbM:S.bbM,shiftDay:S.shiftDay,dcast:S.dcast,props:S.props,radio:S.radio,apass:S.apass,v:SAVEV,texts:S.texts,txs:S.txs,crewMet:S.crewMet,bakDay:S.bakDay}));return true}catch(e){return false}}
+function load(){try{let d=null;try{d=JSON.parse(localStorage.getItem(SK))}catch(e){}if(!d||typeof d.m!=='number'){let b=null;try{b=JSON.parse(localStorage.getItem(SK+'_bak'))}catch(e){}if(b&&typeof b.m==='number'){d=b;setTimeout(()=>toast('Your save couldn’t be read, so the automatic backup was loaded.',6),1500)}}if(!d)return false;d=migrateSave(d);P.money=d.m;P.hp=d.hp||100;P.armor=d.ar||0;P.own=d.own||{fist:1};P.ammo=d.ammo||{};P.cur=d.cur||'fist';P.shirt=d.shirt||P.shirt;P.hat=d.hat||null;S.tod=d.tod;S.day=d.day;S.karma=d.karma||0;S.done=d.done||{};S.gators=d.gators||{};S.kills=d.kills||0;S.jacked=d.jacked||0;S.vMet=d.vMet||0;S.vFriend=d.vFriend||0;S.vBite=d.vBite||0;if(d.look)Object.assign(P.look,d.look);S.own=d.wown||{};S.job=d.job||{};S.medal=d.medal||{};S.photos=d.photos||{};S.dayN=d.dayN||0;S.story=d.story||0;S.beers=d.beers||0;S.wasted=d.wasted||0;S.zyn=d.zyn||0;S.mg=d.mg||{};S.vault=d.vault||0;S.bbG=d.bbG||0;S.bbF=d.bbF||'garage';S.bbS=d.bbS||{};S.bbR=Object.assign({bo:1,drink:0,ice:0,sd:0,heck:1,dog:1,cat:1,mate:1,wind:1},d.bbR||{});S.bbK=Object.assign({t:0,c:0},d.bbK||{});S.fr=d.fr||null;S.bbV=d.bbV?1:0;S.bbX=d.bbX===0?0:1;S.bbM=d.bbM===0?0:1;S.shiftDay=d.shiftDay||{};S.dcast=d.dcast||0;S.props=d.props||{};S.radio=d.radio===undefined?1:d.radio;S.apass=d.apass||0;S.texts=d.texts||[];S.txs=d.txs||{};S.crewMet=d.crewMet||{};S.bakDay=d.bakDay;setTimeout(phoneBadge,50);return true}catch(e){return false}}
 function hasSave(){try{return!!localStorage.getItem(SK)}catch(e){return false}}
 
 /* ================= ENTITIES ================= */
@@ -1856,6 +1857,216 @@ function worldIT(){roadDetail();
  GAS.forEach((g,i)=>addIT(g[0],g[1],'Stop at Gas & Go',()=>openMenu('Gas & Go',[sale('Hot dog off the roller',3,'It has been rolling since Tuesday.',()=>{P.hp=Math.min(MAXHP(),P.hp+20)}),sale('Six-pack',10,'Cold, cheap, perfect.',()=>{S.beers+=6}),{label:'Scratch-off ticket',sub:'$2 · top prize $1,000',dis:P.money<2,fn:()=>{closeMenu();scratch()}},backItem],'Gas, snacks, and lottery dreams.'),{icon:'⛽'}));
 }
 
+function migrateSave(d){const v=d.v||1;if(v<3){d.texts=d.texts||[];d.txs=d.txs||{};d.crewMet=d.crewMet||{}}d.v=SAVEV;return d}
+/* ================= WORLD 5: the BBA crew, the phone, save backup ================= */
+const CV=(p,r,i)=>({pitch:p,rate:r,i});
+const CM=(id,name,need,x,y,shirt,v,pay,hook,title,intro,steps,outro,em)=>({id:'bba_'+id,crew:1,need,name:title,pay,hook,g:{name,x,y,col:'#ff4f9a',em:em||'🍺',shirt,voice:v,tag:'Beer Ball Association · '+BBR[name][0]+' · '+BBR[name][7]},intro,steps:steps.map(st=>st.type==='talk'?Object.assign({},st,{g:Object.assign({em:'🗣️',col:'#ffb627',tag:'Kissimmee local'},st.g)}):st),outro,after(){S.crewMet=S.crewMet||{};S.crewMet[name]=1;txt(name,'Saved your number. Table’s always open for you.');if(CREW.every(q=>S.done[q.id])){unlock('top:bbaall','BBA Association jersey (wardrobe)');txt('BBA group chat','You met the whole league. Official BBA jersey is in your wardrobe. Welcome to the Association.')}}});
+const CREW=[
+CM('eric','Eric',0,5700,3300,'#c9ccd1',CV(1.15,1.05,2),150,'Hey, you’re the new person at Grand Beach right? I lost my practice balls in the bushes. Like, all of them.','Beginner’s Luck',
+ [{npc:'Okay so I’m practicing, right? For the BBA. Everybody’s like “Eric, you’re a novice.” Watch. Someday. Anyway I threw all my balls into the bushes.',opts:[
+  o('pos','Everybody starts somewhere. I’ll help you find them.','You’re the first person who didn’t laugh. Okay, the second. My mom laughed.'),
+  o('neu','How many balls are we talking?','Three. I had four. Don’t ask about the fourth. A duck has it.'),
+  o('neg','All of them? Into the bushes?','I put a little spin on it. Too much spin. It’s a gift and a curse.'),
+  o('dia','I’ll find them and charge you a finder’s fee per ball.','…Is that legal? That sounds legal. Fine. Five bucks a ball.',{bonus:15,karma:-1})]}],
+ [{type:'collect',text:'Find Eric’s three practice balls around Grand Beach',icon:'🏓',pts:[[5560,3240],[5990,3250],[5830,2960]],time:100}],
+ {npc:'MY BALLS! I mean, the ping-pong balls. You know what I mean. Next time we play, I’m throwing one at YOUR can. With love.',opts:[
+  o('pos','Keep practicing. You’ve got this.','Beginner’s luck is still luck! I’ll take it!',{karma:1}),o('neu','Glad to help.','You’re in my phone now. Under “Ball Finder.”'),
+  o('neg','Maybe practice somewhere without bushes.','Then where’s the challenge?'),o('dia','I kept one. As a hostage.','That’s… honestly fair. The duck did the same thing.')]},'🏓'),
+CM('carly','Carly',0,5830,2700,'#ff4f9a',CV(1.2,1.1,3),160,'A SEAGULL took our game ball. On the beach. I am going to get it back.','Full Extension',
+ [{npc:'You see that seagull? That seagull took our game ball mid-throw. I dove for it. I dove for it hard. I have sand everywhere.',opts:[
+  o('pos','Your dive was incredible. Let’s get that ball.','RIGHT? Full extension! Somebody finally noticed!'),
+  o('neu','Where did it go?','Down the beach. It keeps dropping it and picking it back up. It’s taunting me.'),
+  o('neg','You lost a ball to a bird?','I lost a ball to a TACTICIAN.'),
+  o('dia','Let’s just get a new ball and frame the seagull.','I like how you think. No. I want THAT ball.',{karma:-1})]}],
+ [{type:'collect',ordered:1,text:'Dive for the ball every time the gull drops it on the beach',icon:'🏐',pts:[[5760,2640],[5900,2740],[6000,2810],[5720,2860]],time:45}],
+ {npc:'GOT IT! That bird will tell its grandchildren about you. Highflying Hustler, baby.',opts:[
+  o('pos','Teamwork. You called it.','I called it! I called the dive!',{karma:1}),o('neu','One ball, recovered.','Ball count restored. Dignity count pending.'),
+  o('neg','I have sand in places now.','Welcome to the beach division.'),o('dia','I made eye contact with the gull. We have an understanding now.','Don’t you dare switch sides.')]},'🏐'),
+CM('jill','Jill',0,4300,5760,'#3f9b5a',CV(1.05,1,4),180,'Some tourists keep flipping our table in Old Town. Defensive Anchor needs backup.','Anchor Down',
+ [{npc:'Three tourists in matching shirts keep flipping our beer ball table in Old Town. Every time we set it up. Every. Time. I’m the defensive anchor. I need a second anchor.',opts:[
+  o('pos','Say no more. Nobody flips your table.','THANK you. Anchor squad.'),
+  o('neu','Have you tried asking them to stop?','I asked. One of them did a little dance. I can’t let the dance go.'),
+  o('neg','Maybe set it up somewhere less flippable.','The table stays. The table always stays.'),
+  o('dia','Let’s flip THEM.','Knock them down, don’t knock them out. We’re a family league.',{bonus:30,karma:-1})]}],
+ [{type:'kill',text:'Stop the table flippers. Fists only, nobody gets hurt bad.',spawn:[{x:4280,y:6000,kind:'enemy',hp:60,ko:1,name:'Table Flipper'},{x:4330,y:6040,kind:'enemy',hp:60,ko:1,name:'Table Flipper'},{x:4300,y:6080,kind:'enemy',hp:60,ko:1,name:'Table Flipper'}]}],
+ {npc:'Table’s standing. Tourists are sitting. That’s how it’s supposed to be. You can anchor for me anytime.',opts:[
+  o('pos','We make a good defensive line.','Best in the CLE. Don’t tell the others.',{karma:1}),o('neu','They won’t be back.','They’ll be back. But now they’ll knock first.'),
+  o('neg','Next time, pick a quieter town.','Old Town is the quiet town. That’s the scary part.'),o('dia','I kept one of their matching shirts.','You WHAT? …What size?')]},'🛡️'),
+CM('steven','Steven',1,8800,4380,'#7a5a3a',CV(.9,1,5),200,'Somebody stole the league cooler at The Loop. I can smell where it went. Seriously.','Bloodhound',
+ [{npc:'The league cooler is gone. Forty cans and a laminated rule sheet. I don’t want to brag, but I have a nose for these things. I can smell where it went.',opts:[
+  o('pos','Lead the way. I trust the nose.','The nose has never been wrong. Once it was confused. Never wrong.'),
+  o('neu','You can smell a cooler?','I can smell CONDENSATION. Big difference.'),
+  o('neg','Or we check the security cameras like normal people.','Cameras can’t smell. Follow me.'),
+  o('dia','If we find the thief, I get the cooler. You get the rule sheet.','Absolutely not. The rule sheet is laminated.',{karma:-1})]}],
+ [{type:'collect',ordered:1,text:'Follow Steven’s scent trail toward the stolen cooler',icon:'👃',pts:[[8650,4300],[8500,4420],[8380,4600],[8240,4760]],time:110}],
+ {npc:'THE COOLER. All forty cans and the rule sheet. Someone left a sorry note. Spelled “sorry” with a Y in the middle. Amateurs.',opts:[
+  o('pos','That nose is a national treasure.','I’d say insure it, but they keep saying no.',{karma:1}),o('neu','Case closed.','Bloodhound: one. Thief: zero.'),
+  o('neg','We walked a mile for some cans.','We walked a mile for DESTINY.'),o('dia','I drank one on the way back. As a tax.','I smelled that. I smell everything.')]},'👃'),
+CM('kait','Kait',1,2520,5900,'#b08bff',CV(1.1,.95,6),190,'The Celebration HOA is about to fight over lawn height. Again. I could use a calm second voice.','Simmer Sauce',
+ [{npc:'So the Celebration HOA is about to have a full meltdown on Market Street over grass. Two point five inches versus two point six. I calm things down for a living. Socially. Come be calm with me.',opts:[
+  o('pos','Calm is my middle name. Let’s go.','Perfect. Breathe in. Breathe out. Now walk.'),
+  o('neu','Who’s fighting who?','Linda, the HOA president, versus everyone with a lawnmower.'),
+  o('neg','Let them fight. It’s free entertainment.','I agree, but then the snow machine gets canceled.'),
+  o('dia','I’ll bring a ruler and make it worse.','Please don’t. Okay, maybe a little worse. Then better.',{flag:'ruler'})]}],
+ [{type:'goto',text:'Head to Market Street in Celebration with Kait',x:2600,y:6250,r:100},
+  {type:'talk',g:{name:'HOA President Linda',x:2600,y:6250,voice:CV(1.3,1.15,7)},nodes:[{npc:'A tenth of an inch is how civilizations fall. Who are you? Do you have a permit to be calm?',opts:[
+   o('pos','Everyone here just wants the town to look good. You all agree on that.','…We do. We really do. Oh no, I’m feeling things.',{karma:1}),
+   o('neu','Can we split the difference? Two point five five?','Two point five five. That’s… diplomatic. I hate that it works.'),
+   o('neg','Nobody can see a tenth of an inch, Linda.','I CAN SEE IT. I SEE IT EVERY DAY.'),
+   o('dia','I measured your lawn on the way here. Two point seven.','*gasp* …Nobody saw that. Meeting adjourned.',{bonus:40})]}]}],
+ {npc:'Linda hugged a guy with a leaf blower. A leaf blower guy! You’ve got the touch. Simmer Sauce approved.',opts:[
+  o('pos','You did the hard part. I just stood near it.','We make a calming team.',{karma:1}),o('neu','Glad it worked out.','Snow machine stays on. Everybody wins.'),
+  o('neg','I still think they’re all nuts.','Oh, completely. Calm nuts now.'),o('dia','I’m running for HOA president next year.','God help us all. I’ll vote for you.')]},'🧘'),
+CM('tyler','Tyler',1,4560,5700,'#2f6bff',CV(.95,1.05,8),200,'Bet you can’t hit five targets at the range faster than me. Dead Eye challenge.','Dead Eye Challenge',
+ [{npc:'I’m a throwing specialist. That means I aim. At everything. I set up five targets around Old Town’s back lot. Let’s see your eye.',opts:[
+  o('pos','You’re on. May the best eye win.','Love the confidence. It won’t last.'),
+  o('neu','What do I win?','Bragging rights. And money. Mostly bragging.'),
+  o('neg','I’m not here to play target practice.','Everyone’s here to play target practice. It’s Florida.'),
+  o('dia','If I win, you carry my bags for a week.','If you win, I’ll carry them for a month. You won’t win.',{bonus:30})]}],
+ [{type:'collect',text:'Tag all five targets before Tyler’s time runs out',icon:'🎯',pts:[[4460,5610],[4640,5600],[4760,5720],[4520,5800],[4700,5830]],time:35}],
+ {npc:'Okay. Okay okay okay. That was a good time. Dead Eye recognizes Dead Eye.',opts:[
+  o('pos','You taught me everything I know. In the last five minutes.','That’s exactly how long it took me too.',{karma:1}),o('neu','Good game.','Good game. Rematch at the table.'),
+  o('neg','You set them up easy.','I set them up perfect. There’s a difference.'),o('dia','I want a nickname now. “Dead Eye Two.”','Over my dead eye.')]},'🎯'),
+CM('jason','Jason',2,3960,5530,'#19d3c5',CV(1,1,9),220,'Need three slushies from three different gas stations. Don’t ask why. It’s a gullet thing.','Brain Freeze',
+ [{npc:'Icy Stomach. That’s what they call me. I’m training for the clutch chug. I need three slushies from three different Gas & Go stations. Different machines, different ice. It matters.',opts:[
+  o('pos','I respect the commitment. Which flavors?','Blue, red, and whatever the third machine has. Surprise me.'),
+  o('neu','Why three different stations?','Every machine has a different freeze. You have to train your gullet for all of them.'),
+  o('neg','That’s a brain freeze waiting to happen.','The brain freeze is the training.'),
+  o('dia','I’ll drink one on the way. Quality control.','…Fair. Bring me two and a half.',{pay:.9,flag:'sip'})]}],
+ [{type:'collect',text:'Grab a slushie from three Gas & Go stations on 192',icon:'🥤',pts:()=>GAS.slice(0,3).map(q=>[q[0],q[1]]),time:170},
+  {type:'goto',text:'Bring the slushies back to Jason before they melt',x:3960,y:5530,r:80}],
+ {npc:'Three temperatures. Three textures. I can feel my gullet getting stronger. Thank you, coach.',opts:[
+  o('pos','You’re going to chug like a champion.','I already do. Now I’ll do it COLDER.',{karma:1}),o('neu','Slushies delivered.','Five stars. Would hire again.'),
+  o('neg','You’re going to get sick.','Icy Stomach doesn’t get sick. It gets ready.'),o('dia','I licked the red one.','…It still counts.')]},'🥤'),
+CM('dante','Dante',2,9700,6350,'#3b3d46',CV(.85,1.1,10),240,'I got a parking ticket downtown and I intend to argue it. Loudly. I need a witness.','Objection!',
+ [{npc:'I got a parking ticket. Downtown. For parking. Allegedly. I’m going to argue it in front of the judge on Broadway, and I need a witness who will say whatever I say.',opts:[
+  o('pos','I’ll be your witness. What did we see?','We saw a perfectly legal parking job. Repeat after me.'),
+  o('neu','Were you actually parked illegally?','Define “parked.” Define “illegally.” See? Already winning.'),
+  o('neg','Just pay the ticket, Dante.','Never. A Lawless Lawyer never pays. He appeals.'),
+  o('dia','I’ll testify that a gator parked your car.','That’s… brilliant. Florida law is very unclear on gators.',{flag:'gator'})]}],
+ [{type:'goto',text:'Meet Judge Patty on Broadway downtown',x:9600,y:6450,r:100},
+  {type:'talk',g:{name:'Judge Patty',x:9600,y:6450,voice:CV(.8,.9,11)},nodes:[{npc:'Mr. Dante. Again. This is your fourth ticket this month. And who is this? A witness? Go on. Impress me.',opts:[
+   o('pos','He was parked fine, Your Honor. The sign was behind a palm tree.','…The palm tree. Fine. Dismissed. Trim your palms, city.',{karma:1}),
+   o('neu','I didn’t see anything, Your Honor.','Honest. Refreshing. Ticket reduced to a warning.'),
+   o('neg','Honestly, he parked terribly.','DANTE. Your own witness. Ticket stands. Double.',{pay:.6}),
+   o('dia','A gator parked it, Your Honor. I saw the whole thing.','…I’ve heard worse defenses this week. Dismissed. Get out.',{bonus:60})]}]}],
+ {npc:'Did you see that? Did you SEE that? Lawless Lawyer remains undefeated. Well. Mostly defeated, but in a winning way.',opts:[
+  o('pos','You’ve got a gift, Dante.','I know. I’ve been told. By myself, mostly.',{karma:1}),o('neu','Case closed.','Case appealed and closed. My favorite kind.'),
+  o('neg','You owe me for that.','I’ll have my people call your people. I am my people.'),o('dia','Next time I’m charging by the hour.','I’ll argue the rate.')]},'⚖️'),
+CM('joe','Joe',2,5520,5520,'#ff7f50',CV(.9,.95,12),220,'Hot dog contest at the Gas & Go. I need a hype man. They call me the Vacuum.','The Vacuum',
+ [{npc:'There’s a hot dog contest at the Gas & Go and they banned me last year. Something about “inhuman speed.” I need you to sign up as my manager and get me back in.',opts:[
+  o('pos','The people deserve to see the Vacuum. Let’s go.','The people DO deserve it.'),
+  o('neu','How many hot dogs are we talking?','Last year? Forty-one. They stopped counting because they ran out.'),
+  o('neg','Maybe the ban was for your health.','My health is fantastic. My health is a vacuum.'),
+  o('dia','I’ll bribe the judge with a scratch-off.','That’s how it’s done in Kissimmee. Respect.',{flag:'bribe'})]}],
+ [{type:'goto',text:'Head to the Gas & Go near The Big Orange',x:5580,y:5520,r:110},
+  {type:'talk',g:{name:'Contest Host Ray',x:5580,y:5520,voice:CV(1.2,1.2,13)},nodes:[{npc:'Absolutely not. Joe is banned. He ate the tablecloth last year. Who are you supposed to be, his agent?',opts:[
+   o('pos','He’s been training. He’s a changed man. He wants to inspire people.','…Inspire. Okay. One round. No tablecloth.',{karma:1}),
+   o('neu','He’ll pay double the entry fee.','Double? …Sign here.',{pay:.9}),
+   o('neg','Let him in or he eats the hot dog roller too.','He WOULD. Fine! Fine.'),
+   o('dia','*slide a scratch-off across the counter*','It’s a two-dollar winner. …Welcome back, Joe.',{bonus:40})]}]}],
+ {npc:'Fifty-two. FIFTY-TWO. They gave me a trophy shaped like a hot dog. I’m going to sleep for three days.',opts:[
+  o('pos','A legend returns.','The Vacuum is back.',{karma:1}),o('neu','Congrats, champ.','Champ. Say it again.'),
+  o('neg','Please see a doctor.','Dr. Matt already said I’m “a medical mystery.”'),o('dia','I bet against you. I lost everything.','Why would you DO that?')]},'🌭'),
+CM('glenn','Glenn',3,4950,5700,'#ff9a3c',CV(1.05,1.25,14),260,'Speed Demon time trial down 192. Four checkpoints. I already started the clock.','Speed Demon',
+ [{npc:'I’m already running. I’m always running. I timed myself sprinting 192 and now I want to see what you do in a car. Four checkpoints. The clock started when you walked up.',opts:[
+  o('pos','Let’s see some speed. Hop in.','I’ll run alongside. Kidding. Mostly.'),
+  o('neu','What’s the record?','Mine. On foot. Don’t embarrass yourself.'),
+  o('neg','Speeding on 192 is a great way to meet the cops.','The cops can’t catch what they can’t see. Go fast.'),
+  o('dia','I’ll take every shortcut, including the sidewalk.','The sidewalk is a road if you believe hard enough.',{bonus:40,karma:-1})]}],
+ [{type:'collect',ordered:1,veh:1,text:'Get a vehicle and hit Glenn’s four checkpoints down 192',icon:'🏁',pts:[[5300,5600],[6500,5600],[7700,5600],[8900,5600]],time:80}],
+ {npc:'Not bad. Not Speed Demon fast. But not bad. You might have a little demon in you.',opts:[
+  o('pos','Coming from you, that’s everything.','It should be. I’m very fast.',{karma:1}),o('neu','What was my time?','Fast enough to make me nervous.'),
+  o('neg','Next time I’m not dodging tour buses for you.','The tour buses are part of the course.'),o('dia','I ran a red light just to feel something.','That’s the demon talking.')]},'🏁'),
+CM('jaimee','Jaimee',3,1000,2650,'#7ad0ff',CV(1.15,.95,15),240,'Our beer is warming up at EPCOT. Three ice chests hidden around the lagoon. Cool heads only.','Cool and Collected',
+ [{npc:'We set up a World Showcase tasting crawl and someone moved our three ice chests around the lagoon. The beer is warming up. I am staying calm. You should too.',opts:[
+  o('pos','Cool and collected. I’ll find them.','Ice in the veins. That’s the spirit.'),
+  o('neu','Where were they last?','Three countries. I won’t say which. Okay, I don’t know which.'),
+  o('neg','Warm beer is still beer.','We don’t say things like that here.'),
+  o('dia','I’ll grab them and charge the tourists for cold ones.','…Split it fifty-fifty and I didn’t hear that.',{bonus:50,karma:-1})]}],
+ [{type:'collect',text:'Find the three ice chests around the World Showcase lagoon',icon:'🧊',pts:[[700,2300],[1300,2300],[1000,1900]],time:80}],
+ {npc:'Ice cold. Not a single shake in my hands the whole time. Okay, one shake. But a cool shake.',opts:[
+  o('pos','You stayed calm the whole time. Impressive.','I practice. Every throw is a deep breath.',{karma:1}),o('neu','Chests recovered.','Crawl is back on. You’re invited.'),
+  o('neg','I ran around a lagoon in the sun for beer.','For COLD beer. Huge difference.'),o('dia','I sold two to a guy from Ohio.','…Was it a good price?')]},'🧊'),
+CM('jacob','Jacob',3,7350,-6150,'#e8483f',CV(1,1.15,16),260,'My cans are rolling around CityWalk causing chaos. Nobody knows how. Including me.','Chaos Can',
+ [{npc:'Okay, so I set four cans on a table at CityWalk and somehow every one of them ended up somewhere different. One’s in a fountain. Nobody knows how. That’s my whole thing. Chaos.',opts:[
+  o('pos','Chaos needs a cleanup crew. I’m in.','The cleanup crew! I never had one!'),
+  o('neu','How does a can end up in a fountain?','If I knew, I wouldn’t be Chaos Can. I’d be Organized Can.'),
+  o('neg','Maybe stop putting cans on things.','Then where do the cans go? Think about it.'),
+  o('dia','Let’s add more chaos. I’ll kick them further.','YES. No. Wait. Security is watching. Collect them first.',{flag:'kick'})]}],
+ [{type:'collect',text:'Collect Jacob’s four runaway cans before security notices',icon:'🥫',pts:[[7150,-6050],[7500,-6250],[7650,-5900],[7300,-5650]],time:55}],
+ {npc:'Four for four. Somehow one of them is now a different brand. I don’t ask questions. I just embrace it.',opts:[
+  o('pos','Chaos is a lifestyle. I respect it.','Most people just yell at me.',{karma:1}),o('neu','All four, recovered.','Chaos contained. For now.'),
+  o('neg','I’m never helping chaos again.','You say that. Chaos always calls back.'),o('dia','I left a can in every fountain on the way back.','…That’s beautiful.')]},'🥫'),
+CM('matt','Matt',4,10870,5900,'#2b2550',CV(.75,1.05,17),300,'Friday Night Fights. Two hecklers in the front row. I’m about to crash out. Back me up.','Crash Out',
+ [{npc:'Two guys in the front row have been heckling every throw at the arena exhibition match. I’m a defender. I stay calm. I am currently NOT staying calm. Back me up before I crash out.',opts:[
+  o('pos','Let’s handle it together. Calmly-ish.','Calmly-ish. That’s my speed.'),
+  o('neu','What are they yelling?','Something about my form. My form is GREAT.'),
+  o('neg','Just ignore them.','I ignored them for two rounds. I’m out of ignore.'),
+  o('dia','Let’s crash out together. Full send.','FULL SEND. Knock them down, not out. We still have a match.',{bonus:50,karma:-1})]}],
+ [{type:'kill',text:'Quiet the two front-row hecklers. Knock them down, nothing worse.',spawn:[{x:10950,y:5850,kind:'enemy',hp:110,ko:1,name:'Heckler'},{x:11000,y:5880,kind:'enemy',hp:110,ko:1,name:'Heckler'}]}],
+ {npc:'Silence. Beautiful silence. Now I can throw. Crash Out is officially uncrashed.',opts:[
+  o('pos','Your form is great, by the way.','THANK YOU. Somebody gets it.',{karma:1}),o('neu','Arena’s quiet now.','Perfect for a comeback.'),
+  o('neg','You need a stress ball.','I have one. It’s a ping-pong ball. I throw it at cans.'),o('dia','I started heckling YOU from the back.','I heard. It was constructive. Thank you.')]},'💥'),
+CM('brandon','Brandon',4,10100,7050,'#3f9b5a',CV(.85,1,18),300,'Somebody snatched my cooler at Lakefront Park. That’s MY move. Let’s get it back.','Snatch Lord',
+ [{npc:'Somebody snatched my cooler at Lakefront Park. MY cooler. I’m the Snatch Lord. I snatch. Nobody snatches from me. That guy running toward the lake has it.',opts:[
+  o('pos','Nobody out-snatches the Snatch Lord. Let’s go.','Exactly. This is personal now.'),
+  o('neu','What’s in the cooler?','Sandwiches. Cans. A signed ball from the All-Star game.'),
+  o('neg','It’s just a cooler, man.','It’s a STATEMENT, man.'),
+  o('dia','Let’s snatch his shoes too.','Let’s focus. …Okay, one shoe.',{bonus:40,karma:-1})]}],
+ [{type:'kill',text:'Catch the cooler thief before he reaches the lake',spawn:[{x:10300,y:7100,kind:'enemy',hp:70,ko:1,sp:120,name:'Cooler Thief'}]}],
+ {npc:'The cooler returns to its rightful lord. The signed ball is safe. The sandwiches are… mostly safe.',opts:[
+  o('pos','The Snatch Lord reigns.','Long may I snatch.',{karma:1}),o('neu','Cooler secured.','You’re fast. I respect fast.'),
+  o('neg','You should lock that thing up.','A lock is just a challenge for the next snatcher.'),o('dia','I ate a sandwich on the way back.','That’s a snatch fee. Fair.')]},'🧊'),
+CM('michael','Michael',5,1050,4980,'#f2b134',CV(.9,.95,19),320,'Coach’s clinic at Wide World of Sports. Cone drills. You need them. Trust me.','Coach’s Clinic',
+ [{npc:'I’m the coach. Not officially. Spiritually. I watched you play and I have notes. Many notes. Cone drills first. Then we talk about your release.',opts:[
+  o('pos','Coach me up. I want to get better.','That’s the attitude. Hands on your hips. Now let’s go.'),
+  o('neu','What’s wrong with my release?','It’s fine. Fine isn’t great. We’re going for great.'),
+  o('neg','I didn’t ask for a clinic.','Nobody asks. That’s why I’m a coach.'),
+  o('dia','I’ll do the drills if you do them in a whistle and short shorts.','I already have both. I always have both.',{bonus:30})]}],
+ [{type:'collect',ordered:1,text:'Run Coach Michael’s cone drill. Every cone, in order.',icon:'🟠',pts:[[900,5010],[1150,5020],[1180,5180],[930,5190],[1040,5100]],time:45}],
+ {npc:'Look at that footwork. That’s a different human. Next practice, we fix your release. And your attitude. Kidding. Your attitude is great.',opts:[
+  o('pos','Thanks, Coach.','Say it again. I like it.',{karma:1}),o('neu','Same time next week?','Same time every week. I have no other plans.'),
+  o('neg','My legs hate you.','Your legs will thank me in the playoffs.'),o('dia','I’m coaching you next time.','Absolutely not. …What would you change?')]},'📣'),
+CM('josh','Josh',5,5960,3200,'#ff7a3c',CV(.95,1,20),400,'Commissioner here. You’ve met most of the league. Come see me at the Grand Beach table.','The Commissioner',
+ [{npc:'So you’re the one everybody’s been texting about. Josh. I run the BBA. Ratings, awards, the spreadsheet, all of it. The All-Star trophy is at the Rusty Sunset and I want you to go get it.',opts:[
+  o('pos','It’d be an honor, Commissioner.','Commissioner. I like that. Keep saying that.'),
+  o('neu','Why me?','Because everyone says you show up. That’s the only rating that matters. Well, and overall.'),
+  o('neg','Can’t you get your own trophy?','I could. But delegating is what a commissioner does.'),
+  o('dia','What’s my overall?','Pending. Very pending. Get the trophy and we’ll talk.',{bonus:50})]}],
+ [{type:'goto',text:'Pick up the BBA All-Star trophy at the Rusty Sunset Saloon in Old Town',x:4344,y:5942,r:90},
+  {type:'goto',text:'Bring the trophy back to Josh at Grand Beach',x:5960,y:3200,r:80}],
+ {npc:'Look at that. Talent juiced. Officially, as commissioner, I’m adding you to the BBA. Unofficially, you’re carrying the cooler next time.',opts:[
+  o('pos','Thanks for welcoming me in.','That’s what the Association is for.',{karma:1}),o('neu','What’s next?','Next? Franchise mode. Draft season. Stay ready.'),
+  o('neg','I want a better overall.','Earn it at the table. Spreadsheet doesn’t lie.'),o('dia','I’m going to take your spot as the top rated player.','Bold. The spreadsheet says otherwise. For now.')]},'🏆')];
+for(const m of CREW){const f=freeSpot(m.g.x,m.g.y);m.g.x=f[0];m.g.y=f[1];m.g.skin=Rpick(SKIN)}
+function sideList(){return MISSIONS.concat(CREW.filter(m=>(S.story||0)>=m.need))}
+/* ---- phone: texts ---- */
+function txt(f,t){S.texts=S.texts||[];S.texts.unshift({f,t,d:S.dayN,m:Math.round(S.tod),r:0});if(S.texts.length>40)S.texts.length=40;toast('📱 '+f+': '+(t.length>70?t.slice(0,70)+'…':t),4);tone(1320,.06,'sine',.06);setTimeout(()=>tone(1760,.08,'sine',.06),90);phoneBadge()}
+function phoneBadge(){try{const n=(S.texts||[]).filter(x=>!x.r).length;$('bPhone').textContent=n?'Phone ('+n+')':'Phone'}catch(e){}}
+const PHT={t:0};
+function phoneTick(dt){PHT.t-=dt;if(PHT.t>0)return;PHT.t=2.5;if(S.mode!=='play'||S.mission)return;S.txs=S.txs||{};
+ if(S.txs.st!==S.story){S.txs.st=S.story;const sm=curStory();if(sm)txt(sm.g.name,S.story?'Nice work. Next up: “'+sm.name+'.” Find me at the gold marker.':'Welcome to Kissimmee. I’m at the gold marker on your map. We need to talk about the Dean.');return}
+ if(S.t>(S.txs.cn||0))for(const m of CREW)if((S.story||0)>=m.need&&!S.done[m.id]&&!S.txs[m.id]){S.txs[m.id]=1;S.txs.cn=S.t+45;txt(m.g.name,m.hook+' (pink dot on your map)');return}
+ for(const k in (S.props||{}))if(propDue(k)>=PROPS[k].i*3&&S.txs['p_'+k]!==S.dayN){S.txs['p_'+k]=S.dayN;txt('Manager, '+PROPS[k].n,'The safe is full: $'+propDue(k)+' waiting. Come grab it before it walks off.');return}
+ if(S.day===6&&S.tod>=1140&&S.tod<1170&&S.txs.cs!==S.dayN){S.txs.cs=S.dayN;txt('Old Town Cruisers','Car show tonight, 8 to 10, down Old Town’s main drag. Bring something loud.');return}
+ if(S.t>(S.txs.nx||0)){S.txs.nx=S.t+rnd(150,260);const met=Object.keys(S.crewMet||{}),pool=[['Uncle Cooper',pick(COOP_LINES)],['Timeshare Terry','Still thinking about that free breakfast? I am. Every day.'],['Vartan','I am outside. I am always outside. Tap Taxi.'],['Mustard Mike','who has my mustard. not mad. just asking. a little mad'],['Dr. Matt','Reminder: hydration is not a beer brand. Come see me if anything hurts.'],['Gator Gary','Princess says hi. She also ate a pool noodle.']];if(met.length)pool.push(['BBA group chat',pick(met)+': table’s set up at Grand Beach, who’s in?'],['BBA group chat','Reminder: Franchise draft is Backyard Baseball rules. No crying.']);const q=pick(pool);txt(q[0],q[1])}}
+function phoneOpen(){if(S.mode!=='play'){return}const un=(S.texts||[]).filter(x=>!x.r).length,met=Object.keys(S.crewMet||{}).length,st=S.radio>0?RADIO[S.radio-1].n:'off';
+ openMenu('📱 Phone',[{label:'Messages'+(un?' · '+un+' new':''),sub:(S.texts&&S.texts[0])?(S.texts[0].f+': '+S.texts[0].t).slice(0,30)+'…':'no messages yet',fn:phoneMsgs},{label:'Contacts',sub:(4+met)+' people',fn:phoneContacts},{label:'Radio',sub:st,fn:phoneRadio},{label:'Properties',sub:propSummary(),fn:propMenu},{label:'BBA League',sub:'player cards and career leaders',fn:bbLeague},{label:'Jobs and progress',sub:'BBA crew '+CREW.filter(m=>S.done[m.id]).length+'/16',fn:jobsMenu},{label:'Save backup',sub:'export or restore your save',fn:phoneSave},{label:'Close',fn:closeMenu}],'$'+P.money+' · '+clock())}
+function phoneMsgs(){const T=S.texts||[];T.forEach(x=>x.r=1);phoneBadge();openMenu('Messages',(T.length?T.map(x=>({label:x.f,sub:x.t,info:1})):[{label:'No messages yet',info:1}]).concat([{label:'Back',fn:phoneOpen}]),'Newest first.')}
+function phoneContacts(){const met=Object.keys(S.crewMet||{}),it=[{label:'Vartan',sub:'taxi · fast and reckless',fn:()=>{closeMenu();callVartan()}},{label:'Dr. Matt',sub:'phone diagnosis',fn:()=>{closeMenu();toast('Dr. Matt: '+pick(['“Sounds like Florida. Drink water.”','“Is it a gator bite? Then come in. If not, ice it.”','“I’m going to need you to stop doing whatever you just did.”']),5)}},{label:'Uncle Cooper',sub:'he always answers',fn:()=>{closeMenu();toast('Uncle Cooper: '+pick(COOP_LINES),5)}},{label:'Timeshare Terry',sub:'blocked? not blocked.',fn:()=>{closeMenu();toast('Terry: “You called ME? This is the best day of my life. Breakfast is Tuesday.”',5)}}];
+ for(const n of met)it.push({label:n,sub:'BBA '+BBR[n][0]+' · '+Math.round(BBR[n][1])+' OVR',fn:()=>openMenu(n,[{label:'Play beer ball together',sub:'you pick who you are; '+n+' is your partner',fn:()=>{closeMenu();bbDraft(['Who are you?'],t=>{if(t[0]===n){toast(n+' can’t partner with themselves. Pick someone else.',3);return}const r=frShuf(BBN.filter(x=>x!==n&&x!==t[0]));mgGo(GAMES.bb,1,{t:[t[0],n,r[0],r[1]]})})}},{label:'Text '+n,fn:()=>{closeMenu();txt(n,pick(['Table’s open. Bring cans.','You free Saturday? Car show then beer ball.','My special is charging. Watch out.','Did you see the new BBA ratings? I’m underrated.','Practice tonight. Grand Beach. Be there.']))}},{label:'Back',fn:phoneContacts}],SPEC[n].n+': '+SPEC[n].d)});
+ if(!met.length)it.push({label:'Meet the BBA crew',sub:'pink dots on your map',info:1});it.push({label:'Back',fn:phoneOpen});openMenu('Contacts',it)}
+function phoneRadio(){openMenu('Radio',[{label:(S.radio===0?'✓ ':'')+'Off',fn:()=>{S.radio=0;hush();save();phoneRadio()}}].concat(RADIO.map((r,i)=>({label:(S.radio===i+1?'✓ ':'')+r.n,sub:r.pirate?'Cap’n Saltbeard, maritime news':r.talk?'talk radio':'music',fn:()=>{S.radio=i+1;RAD.lt=0;hush();save();phoneRadio()}}))).concat([{label:'Back',fn:phoneOpen}]),'Plays while you’re in a vehicle. Tap the radio bar to skip stations.')}
+/* ---- save backup ---- */
+function saveBak(){try{if(S.bakDay!==S.dayN){const o=localStorage.getItem(SK);if(o)localStorage.setItem(SK+'_bak',o);S.bakDay=S.dayN}}catch(e){}}
+function saveCode(){save();const j=localStorage.getItem(SK)||'';return'KN'+SAVEV+':'+btoa(unescape(encodeURIComponent(j)))}
+function parseSave(t){t=String(t||'').trim();let j=t;if(/^KN\d+:/.test(t))j=decodeURIComponent(escape(atob(t.replace(/^KN\d+:/,'').replace(/\s+/g,''))));const d=JSON.parse(j);if(typeof d.m!=='number'||!d.done)throw new Error('not a Kissimmee Nights save');return JSON.stringify(d)}
+function restoreFrom(t){try{const j=parseSave(t);localStorage.setItem(SK+'_bak',localStorage.getItem(SK)||j);localStorage.setItem(SK,j);toast('Save restored. Reloading…',3);setTimeout(()=>location.reload(),900)}catch(e){toast('That doesn’t look like a save code or file.',4)}}
+function phoneSave(){openMenu('Save backup',[{label:'Copy save code',sub:'paste it into notes, email, anywhere',fn:()=>{const c=saveCode();try{navigator.clipboard.writeText(c).then(()=>toast('Save code copied ('+Math.round(c.length/1024)+' KB). Paste it somewhere safe.',4),()=>showCode(c))}catch(e){showCode(c)}}},{label:'Download save file',sub:'a .json file for this device',fn:()=>{save();try{const b=new Blob([localStorage.getItem(SK)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='kissimmee-nights-save-day'+S.dayN+'.json';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);toast('Save file downloaded.',3)}catch(e){toast('Downloads aren’t available here. Use the save code instead.',4)}}},{label:'Restore from code',sub:'replaces your current save',fn:restoreCodeUI},{label:'Restore the automatic backup',sub:(()=>{try{const b=JSON.parse(localStorage.getItem(SK+'_bak'));return b?'day '+(b.dayN||1)+' · $'+b.m:'no backup yet'}catch(e){return'no backup yet'}})(),fn:()=>{const b=(()=>{try{return localStorage.getItem(SK+'_bak')}catch(e){return null}})();if(!b){toast('No backup yet. One is made each in-game day.',3);return}restoreFrom(b)}},{label:'Restore from file',sub:'replaces your current save',fn:()=>{const i=document.createElement('input');i.type='file';i.accept='.json,.txt,application/json,text/plain';i.style.display='none';i.onchange=()=>{const f=i.files&&i.files[0];if(!f)return;const r=new FileReader();r.onload=()=>restoreFrom(r.result);r.readAsText(f);i.remove()};document.body.appendChild(i);i.click()}},{label:'Back',fn:phoneOpen}],'Your game saves itself on this device, and keeps a backup from the previous in-game day. Back up before clearing browser data or switching phones. Version '+SAVEV+'.')}
+function showCode(c){openMenu('Your save code',[],null);const b=$('menuBody'),ta=document.createElement('textarea');ta.value=c;ta.readOnly=true;ta.style.cssText='width:100%;height:160px;font-size:11px;border-radius:8px;padding:6px';b.appendChild(ta);ta.select();const k=document.createElement('button');k.className='mi';k.textContent='Back';k.onclick=phoneSave;b.appendChild(k)}
+function restoreCodeUI(){openMenu('Restore from code',[],null);const b=$('menuBody'),ta=document.createElement('textarea');ta.placeholder='Paste your KN3:… save code here';ta.style.cssText='width:100%;height:150px;font-size:12px;border-radius:8px;padding:6px;margin-bottom:6px';b.appendChild(ta);const go=document.createElement('button');go.className='mi';go.textContent='Restore this save';go.onclick=()=>restoreFrom(ta.value);b.appendChild(go);const k=document.createElement('button');k.className='mi';k.textContent='Back';k.onclick=phoneSave;b.appendChild(k)}
+
 /* ================= WORLD 4: park satire, tourist traps, car radio ================= */
 PROPS.tshare={n:'1/52nd of a Timeshare',p:2999,i:3};
 function inPark(x,y){return RES.some(r=>r.pk&&x>r.x&&x<r.x+r.w&&y>r.y&&y<r.y+r.h)}
@@ -2361,7 +2572,7 @@ function nearIT(){if(S.mission&&S.mission.m.activity)return null;let best=null,b
   for(const it of IT){if(P.veh&&!it.any)continue;const d=hyp(it.x-P.x,it.y-P.y);if(d<it.r&&d<bd){bd=d;best=it}}
   if(!P.veh)for(const p of PED)if(p.say&&p.st!=='dead'&&!p.hostile){const d=hyp(p.x-P.x,p.y-P.y);if(d<46&&d<bd){bd=d;best={label:'Talk to '+p.name,fn:()=>p.say(p)}}}
   {const sm=curStory();if(sm&&!S.mission&&!P.veh&&!sm.hideG){const d=hyp(sm.g.x-P.x,sm.g.y-P.y);if(d<50&&d<bd){bd=d;best={label:'Talk to '+sm.g.name,fn:()=>startMission(sm)}}}}
-  if(!S.mission&&!P.veh)for(const m of MISSIONS){if(S.done[m.id])continue;const d=hyp(m.g.x-P.x,m.g.y-P.y);if(d<50&&d<bd){bd=d;best={label:'Talk to '+m.g.name,fn:()=>startMission(m)}}}
+  if(!S.mission&&!P.veh)for(const m of sideList()){if(S.done[m.id])continue;const d=hyp(m.g.x-P.x,m.g.y-P.y);if(d<50&&d<bd){bd=d;best={label:'Talk to '+m.g.name,fn:()=>startMission(m)}}}
   const tv=VAR.v;if(tv&&tv.ai&&!P.riding&&!VAR.pass){const d=hyp(tv.x-P.x,tv.y-P.y);if(tv.ai.hold){if(d<100&&d<bd){bd=d;best={label:'Talk to Vartan',fn:vartanTalk}}}else if(d<330&&!best&&!S.mission)best={label:'Hail Vartan’s taxi',fn:vartanHail}}
   return best}
 function doCar(){if(S.mode!=='play'||P.dead||S.cine)return;if(P.riding){toast('The doors don’t open from the inside. Vartan says it’s a feature.',2.5);return}
@@ -2390,7 +2601,7 @@ addEventListener('pointerup',pup);addEventListener('pointercancel',pup);
 addEventListener('contextmenu',e=>e.preventDefault());
 function tbtn(id,down,up){const b=$(id);b.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();audioInit();setTouch();b.classList.add('on');down()});const u=e=>{b.classList.remove('on');if(up)up()};b.addEventListener('pointerup',u);b.addEventListener('pointercancel',u);b.addEventListener('pointerleave',u)}
 addEventListener('touchstart',()=>setTouch(),{passive:true});tbtn('bFire',()=>TB.fire=true,()=>TB.fire=false);tbtn('bAct',doAct);tbtn('bCar',doCar);tbtn('bWpn',nextWeapon);
-$('bPause').onclick=pause;$('bTaxi').onclick=()=>callVartan();$('bMap').onclick=()=>{if(S.mode==='play')openMap()};
+$('bPause').onclick=pause;$('bTaxi').onclick=()=>callVartan();$('bPhone').onclick=()=>{if(S.mode==='play')phoneOpen()};$('bMap').onclick=()=>{if(S.mode==='play')openMap()};
 $('dlgNext').onclick=()=>{if(dlgResolve)dlgResolve()};$('mapClose').onclick=()=>closeMap();
 
 /* ================= UPDATE ================= */
@@ -2469,7 +2680,7 @@ function update(dt){S.t+=dt;S.tod+=dt*.5;if(S.tod>=1440){S.tod-=1440;S.day=(S.da
   /* ped vs AI vehicle */
   for(const v of VEH){if(v===P.veh||Math.abs(v.s)<90||!onScreen(v.x,v.y))continue;const T=VT[v.type],c=Math.cos(v.a),s=Math.sin(v.a);for(const p of PED){if(p.st==='dead'||p.follow)continue;const dx=p.x-v.x,dy=p.y-v.y,rx=dx*c+dy*s,ry=-dx*s+dy*c;if(Math.abs(rx)<T.l/2+4&&Math.abs(ry)<T.w/2+4)damagePed(p,Math.abs(v.s)*.3,false,c*10,s*10)}
     if(!P.veh&&!P.dead&&!P.riding){const dx=P.x-v.x,dy=P.y-v.y,rx=dx*c+dy*s,ry=-dx*s+dy*c;if(Math.abs(rx)<T.l/2+5&&Math.abs(ry)<T.w/2+5){hurtPlayer(Math.abs(v.s)*.08,'car');P.x+=c*16;P.y+=s*16;v.s*=.6}}}
-  updCops(dt);updMission(dt);updShow(dt);vartanTick(dt);ambient(dt);storyTick(dt);localsTick(dt);
+  updCops(dt);updMission(dt);updShow(dt);vartanTick(dt);ambient(dt);phoneTick(dt);storyTick(dt);localsTick(dt);
   spT-=dt;if(spT<=0){spT=.35;const lowEnd=touchMode;let nt=0,np=0;for(const v of VEH)if(v.ai&&v.ai.from)nt++;for(const p of PED)if(p.path)np++;if(nt<(lowEnd?10:15)*trafMul())spawnTraffic();if(np<(lowEnd?8:13))spawnPed();zonePeds();
     for(const p of PED)if(!p.keep&&!p.follow&&!p.zone&&hyp(p.x-CAM.x,p.y-CAM.y)>SPF+250)p.rm=1}
   for(let i=VEH.length-1;i>=0;i--)if(VEH[i].rm&&VEH[i]!==P.veh)VEH.splice(i,1);
@@ -2569,7 +2780,7 @@ function render(){frameId++;const z=CAM.z;ctx.setTransform(DPR,0,0,DPR,0,0);ctx.
   for(const p of PED)if(p.st==='dead'&&vis(p.x,p.y))drawPerson(p.x,p.y,p.a,p.col,p.skin,p.hair,0,{dead:1,kind:p.kind});
   for(const v of VEH)if(vis(v.x,v.y,60)){drawVeh(v);if(v.vartan)label('Vartan',v.x,v.y-26,12,'#ffe14d')}
   for(const p of PED){if(p.st==='dead'||p.hide||!vis(p.x,p.y))continue;drawPerson(p.x,p.y,p.a,p.col,p.skin,p.hair,p.walk,{kind:p.kind,wpn:p.wpn,swim:inWater(p.x,p.y),cap:p.cap,boss:p.boss,stain:p.mm,ears:p.ears,bal:p.bal});if(p.name)label(p.name,p.x,p.y-22,12,'#ffb627');if(p.hostile&&p.keep&&p.hp<900){ctx.fillStyle='#000';ctx.fillRect(p.x-14,p.y-18,28,4);ctx.fillStyle='#ff5a5a';ctx.fillRect(p.x-14,p.y-18,28*clamp(p.hp/(p.mhp||(p.mhp=p.hp)),0,1),4)}}
-  for(const m of MISSIONS.concat(curStory()||[])){const g=m.g;if(m.hideG)continue;if(!vis(g.x,g.y))continue;if(S.done[m.id]&&!(ms&&ms.m===m))continue;if(!g.noBody)drawPerson(g.x,g.y,PI/2,g.shirt,g.skin,'#333',0,{});if(!ms||(ms.ret&&ms.m===m)){ctx.fillStyle=m.story?'#ffcc33':'#b08bff';ctx.beginPath();ctx.arc(g.x,g.y-24-Math.sin(S.t*3)*3,10,0,TAU);ctx.fill();ctx.font='700 15px sans-serif';ctx.textAlign='center';ctx.fillStyle='#151226';ctx.fillText(ms?'!':'?',g.x,g.y-19-Math.sin(S.t*3)*3)}label(g.name,g.x,g.y+24,12,'#d9c8ff')}
+  for(const m of sideList().concat(curStory()||[])){const g=m.g;if(m.hideG)continue;if(!vis(g.x,g.y))continue;if(S.done[m.id]&&!(ms&&ms.m===m))continue;if(!g.noBody)drawPerson(g.x,g.y,PI/2,g.shirt,g.skin,'#333',0,{});if(!ms||(ms.ret&&ms.m===m)){ctx.fillStyle=m.story?'#ffcc33':m.crew?'#ff4f9a':'#b08bff';ctx.beginPath();ctx.arc(g.x,g.y-24-Math.sin(S.t*3)*3,10,0,TAU);ctx.fill();ctx.font='700 15px sans-serif';ctx.textAlign='center';ctx.fillStyle='#151226';ctx.fillText(ms?'!':'?',g.x,g.y-19-Math.sin(S.t*3)*3)}label(g.name,g.x,g.y+24,12,'#d9c8ff')}
   if(!P.veh&&!P.dead&&!S.cine&&!P.riding)drawHero(ctx,P.look,P.x,P.y,P.a,P.walk,{wpn:P.cur!=='fist'&&!(S.mission&&S.mission.m.fists)?P.cur:null,swing:P.swing>0,swim:P.swim});
   if(P.dead&&!P.veh)drawHero(ctx,P.look,P.x,P.y,P.a,0,{dead:1});
   /* buildings */
@@ -2623,7 +2834,7 @@ function blip(g,x,y,c,r,sq,k,half){let dx=(x-P.x)*k,dy=(y-P.y)*k;const d=hyp(dx,
 function drawRadar(){if(!MM)return;const s=236,half=s/2,k=half/850;rx.setTransform(1,0,0,1,0,0);rx.clearRect(0,0,s,s);rx.save();rx.beginPath();rx.arc(half,half,half,0,TAU);rx.clip();rx.fillStyle='#3d6b3a';rx.fillRect(0,0,s,s);
   rx.translate(half-P.x*k,half-P.y*k);rx.drawImage(MM,WX0*k,WY0*k,(WW-WX0)*k,(WH-WY0)*k);rx.setTransform(1,0,0,1,0,0);
   for(const it of IT)if(it.blip&&hyp(it.x-P.x,it.y-P.y)<850||it.home)blip(rx,it.x,it.y,it.blip||'#19d3c5',it.home?8:6,1,k,half);
-  if(!S.mission)for(const m of MISSIONS)if(!S.done[m.id])blip(rx,m.g.x,m.g.y,'#b08bff',7,0,k,half);{const sm=curStory();if(sm&&!S.mission)blip(rx,sm.g.x,sm.g.y,'#ffcc33',9,0,k,half)}
+  if(!S.mission)for(const m of sideList())if(!S.done[m.id])blip(rx,m.g.x,m.g.y,m.crew?'#ff4f9a':'#b08bff',7,0,k,half);{const sm=curStory();if(sm&&!S.mission)blip(rx,sm.g.x,sm.g.y,'#ffcc33',9,0,k,half)}
   if(showOn()||(S.day===6&&S.tod>=1170&&S.tod<1200))blip(rx,4300,6080,(S.t*2|0)%2?'#fff':'#111',8,1,k,half);
   for(const t of missionTargets())blip(rx,t.x,t.y,'#ffb627',8,0,k,half);
   if(VAR.v)blip(rx,VAR.v.x,VAR.v.y,'#f4c20d',6,1,k,half);
@@ -2649,14 +2860,14 @@ function openMap(){S.mode='map';const c=$('mapc'),sc=Math.min((innerWidth-40)/(W
   for(const r of RES)if(r.n)t(r.n,r.x+r.w/2,r.y+r.h/2,r.pk?'#fff':'#ffe9c2');
   t('Grand Beach (home)',5700,3560,'#7df5e8');t('Old Town',4300,6950,'#ffd9b0');t('Celebration',2900,6100);t('Downtown Kissimmee',9950,6330);t('Lake Toho',10600,7900,'#bfe6ff');t('Lake Bryan',6250,2320,'#bfe6ff');t('I-4',2250,5150,'#ffe08a');t('I-4',7100,-2700,'#ffe08a');t('US-192',7000,5500);t('I-Drive',8500,-500);t('Sand Lake Rd',6400,-3420);t('World Dr',-1500,2500);t('Airport',6850,7050);t('Gator Ranch',10200,1520,'#b8ff9a');t('Florida Mall',10900,-2800);t('Convention Ctr',7250,-2400);
   const dot=(x,y,c2,r)=>{g.fillStyle=c2;g.strokeStyle='#000';g.lineWidth=2;g.beginPath();g.arc((x-WX0)*sc,(y-WY0)*sc,r,0,TAU);g.fill();g.stroke()};
-  for(const it of IT)if(it.blip)dot(it.x,it.y,it.blip,4);if(!S.mission)for(const m of MISSIONS)if(!S.done[m.id])dot(m.g.x,m.g.y,'#b08bff',5);{const sm=curStory();if(sm&&!S.mission)dot(sm.g.x,sm.g.y,'#ffcc33',8)}for(const tg of missionTargets())dot(tg.x,tg.y,'#ffb627',7);
+  for(const it of IT)if(it.blip)dot(it.x,it.y,it.blip,4);if(!S.mission)for(const m of sideList())if(!S.done[m.id])dot(m.g.x,m.g.y,m.crew?'#ff4f9a':'#b08bff',5);{const sm=curStory();if(sm&&!S.mission)dot(sm.g.x,sm.g.y,'#ffcc33',8)}for(const tg of missionTargets())dot(tg.x,tg.y,'#ffb627',7);
   if(VAR.v)dot(VAR.v.x,VAR.v.y,'#f4c20d',5);dot(P.x,P.y,'#fff',6);dot(P.x,P.y,'#ff4f9a',3);$('mapWrap').classList.remove('hide')}
 function closeMap(){$('mapWrap').classList.add('hide');if(S.mode==='map')S.mode='play'}
 
 /* ================= BOOT ================= */
 function resize(){DPR=Math.min(window.devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR}
 addEventListener('resize',resize);
-function startGame(cont){audioInit();if(cont)load();else{try{localStorage.removeItem(SK)}catch(e){}}
+function startGame(cont){audioInit();if(cont)load();else{try{const o=localStorage.getItem(SK);if(o)localStorage.setItem(SK+'_bak',o);localStorage.removeItem(SK)}catch(e){}}
   P.x=HOME.x;P.y=HOME.y;P.veh=null;P.riding=null;P.dead=false;VAR.v=null;VAR.ride=null;VAR.pass=false;VAR.textT=S.t+240;CAM.x=P.x;CAM.y=P.y;PED.length=0;for(const z of PZ)z.live=false;showLive=false;
   resetVehicles();resetPickups();buildIT();vartanPlace(6100,5600,0);$('title').classList.add('hide');$('hud').classList.remove('hide');S.mode='play';
   if(cont)toast('Welcome back to Lake Bryan.',5);else openChar('create')}
@@ -2671,7 +2882,7 @@ function frameBody(t){const dt=Math.min(.05,(t-last)/1000||0);last=t;
   if(S.mode==='play'){update(dt);if(UQ.length&&toastT<=0&&!S.mission){toast('Unlocked: '+UQ.shift()+'.',3.6);sfx.cash()}}
   if(S.mode!=='title'&&!heavyUI())render();}
 requestAnimationFrame(frame);
-window.__G={STANDS,RADIO,radioNext,parkSurge,inPark,vqJoin,parkEvents,DECO,worldIT,roadDetail,GAS,PROPS,propDue,propItems,bbMulti,SHF,SHIFTS,shiftGo,parkIT,bbAudio,paradeOn,frNew,frHub,frStep,frCatchUp,frNext,frGoSim,frGo,frCpuPick,frSnake,frSched,frBoard,frLottery,frUniform,frIntro,frStandings,frLeaders,frRecords,frSchedule,frBoxPage,frTeamPage,frHistory,frCeremony,frNextSeason,frAwardsCompute,frMvpScore,frRun,frASopt,frOpt,frU,FRL,heavyUI,BBCARD,bbPick,bbCardDraw,SPEC,BBR,BBN,bbMenu,RG,SG,BB,CHS,VLT,GAMES,mgGo,mgTick,mgTap,mgClose,vaultGen,chLegal,chAI,chInit,chDo,COOP,MUST,drMatt,localsTick,HELI,LIGHTS,SKID,STORY,curStory,startDelivery,startMedic,startVig,startFight,startRaceTT,startAir,RACES,PHOTOS,GATORS,RES,DECO,jobsMenu,openChar,closeChar,unlock,UQ,safehouse,garage,clothShop,rainAmt,areaName,WATER,VAR,vartanTalk,vartanMenu,callVartan,startRide,startRace,startFares,startBite,DEST,route,N,S,P,VEH,PED,PICK,IT,MISSIONS,B,update,render,startGame,doCar,doAct,startMission,K,CAM,advance,mkVeh,mkPed,addHeat,nextStep,finishMission,TREES};
+window.__G={CREW,sideList,phoneOpen,phoneMsgs,phoneContacts,phoneSave,phoneTick,phoneBadge,txt,saveCode,parseSave,restoreFrom,migrateSave,save,load,SK,SAVEV,updMission,missionTargets,solid,inWater,STANDS,RADIO,radioNext,parkSurge,inPark,vqJoin,parkEvents,DECO,worldIT,roadDetail,GAS,PROPS,propDue,propItems,bbMulti,SHF,SHIFTS,shiftGo,parkIT,bbAudio,paradeOn,frNew,frHub,frStep,frCatchUp,frNext,frGoSim,frGo,frCpuPick,frSnake,frSched,frBoard,frLottery,frUniform,frIntro,frStandings,frLeaders,frRecords,frSchedule,frBoxPage,frTeamPage,frHistory,frCeremony,frNextSeason,frAwardsCompute,frMvpScore,frRun,frASopt,frOpt,frU,FRL,heavyUI,BBCARD,bbPick,bbCardDraw,SPEC,BBR,BBN,bbMenu,RG,SG,BB,CHS,VLT,GAMES,mgGo,mgTick,mgTap,mgClose,vaultGen,chLegal,chAI,chInit,chDo,COOP,MUST,drMatt,localsTick,HELI,LIGHTS,SKID,STORY,curStory,startDelivery,startMedic,startVig,startFight,startRaceTT,startAir,RACES,PHOTOS,GATORS,RES,DECO,jobsMenu,openChar,closeChar,unlock,UQ,safehouse,garage,clothShop,rainAmt,areaName,WATER,VAR,vartanTalk,vartanMenu,callVartan,startRide,startRace,startFares,startBite,DEST,route,N,S,P,VEH,PED,PICK,IT,MISSIONS,B,update,render,startGame,doCar,doAct,startMission,K,CAM,advance,mkVeh,mkPed,addHeat,nextStep,finishMission,TREES};
 })();
 </script>
 </body>
