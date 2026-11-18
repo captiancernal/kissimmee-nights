@@ -1,0 +1,36 @@
+# Kissimmee Nights
+
+A GTA-style top-down browser game set in greater Kissimmee, Florida. Home base is Grand Beach resort on Lake Bryan. The game also has Old Town and its Saturday night car show, the Disney and Universal parks, Strangers and Freaks side missions, and Vartan, the Armenian speed racer.
+
+The resort holds ten mini-games plus the full **BBA beer ball** league: 16 rated players, player cards, specials, house rules, floors and distractions, and **BBA Franchise** mode, with a draft, uniforms, a season, an All-Star Game, the playoffs, records and 21 awards.
+
+## Play
+
+- **Online:** the GitHub Pages link for this repo, once Pages is turned on.
+- **Offline:** download `index.html` and open it in any browser. Everything is in that one file.
+
+Works on phones (touch) and computers (keyboard). Saves stay in the browser on that device.
+
+## Layout
+
+| Path | What it is |
+| --- | --- |
+| `index.html` | The whole game: HTML, CSS and JavaScript in one file |
+| `tests/harness.js` | Fake browser for running the game code in Node |
+| `tests/*.js` | Simulation tests: bots play the story, mini-games, beer ball, franchise seasons and the wanted level |
+| `tools/extract.sh` | Pulls the script out of `index.html` into `tests/g.js` |
+| `tools/run-tests.sh` | Extracts, then runs every test |
+
+## Tests
+
+Requires Node 18 or later.
+
+```
+tools/run-tests.sh
+```
+
+Tests print results instead of asserting, so read the output: look for `errors 0`, `stuck 0` and `IT errors 0`.
+
+## Credits
+
+Player ratings, badges, archetypes, stadiums and award names come from the Beer Ball Association ratings sheet (BBA V4, 2K27). The game reads that data; it never writes back to the sheet.
