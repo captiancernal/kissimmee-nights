@@ -18,7 +18,7 @@ G.S.mode='play';const items=G.bbMenu();console.log('menu items',items.map(i=>i.l
 for(let r=0;r<5;r++){const t=['Josh','Matt'],rest=G.BBN.filter(x=>!t.includes(x)).sort((a,b)=>G.BBR[a][1]-G.BBR[b][1]),g=Math.min(G.S.bbG,4),opp=[rest[g*3],rest[g*3+1]];let res,tries=0;do{res=bb(1,{t:t.concat(opp),g},5);tries++;G.S.mg={}}while(G.S.bbG===g&&tries<8);console.log('gauntlet round',g+1,'vs',opp.join(' & '),'tries',tries,'money',G.P.money,'|',res.msg,'|',res.sum.slice(0,40))}
 console.log('bbG',G.S.bbG,'sub',G.bbMenu()[3].sub);
 // draft menu flow
-items.find(x=>x.label==='Pick all four players').fn();console.log('draft title:',els.menuTitle.textContent);for(let i=0;i<4;i++)G.BBCARD.pick();console.log('after 4 picks: game on',R.on,R.st.P.map(p=>p.n).join(','),R.st.ph);
+items.find(x=>x.label==='Custom match · 1 player').fn();console.log('draft title:',els.menuTitle.textContent);for(let i=0;i<4;i++)G.BBCARD.pick();console.log('after 4 picks: game on',R.on,R.st.P.map(p=>p.n).join(','),R.st.ph);
 for(let i=0;i<200;i++)G.mgTick(.033);console.log('intro auto-advances →',R.st.ph);G.mgClose();
 let bad=0;for(const it of G.IT){G.S.mode='play';G.S.cine=null;G.S.mission=null;G.P.veh=null;G.P.money=500;try{it.fn();if(R.on){for(let i=0;i<20;i++)G.mgTick(.05);G.mgClose()}}catch(e){bad++;console.log('IT fail',it.label,e.message)}}console.log('IT errors',bad);
 G.S.mode='play';step(60);console.log('save ok',G.safehouse?true:false,G.S.mode);

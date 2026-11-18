@@ -4,6 +4,8 @@ A GTA-style top-down browser game set in greater Kissimmee, Florida. Home base i
 
 The parks have rides, food carts, souvenir hats, character meets, wait-time boards, an afternoon parade and nightly fireworks. Seven shift jobs pay real money once per in-game day: churros, margaritas, popcorn, safari guide, two bars and street performing.
 
+Around Kissimmee: six businesses you can buy for daily income, hotels to sleep at, a bowling alley, cinema, dinner joust, gator show, helicopter and plane tours, gas stations with scratch-offs, billboards and bus stops.
+
 The resort holds ten mini-games plus the full **BBA beer ball** league: 16 rated players, player cards, specials, house rules, floors and distractions, and **BBA Franchise** mode, with a draft, uniforms, a season, an All-Star Game, the playoffs, records and 21 awards.
 
 ## Play
