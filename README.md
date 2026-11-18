@@ -2,6 +2,8 @@
 
 A GTA-style top-down browser game set in greater Kissimmee, Florida. Home base is Grand Beach resort on Lake Bryan. The game also has Old Town and its Saturday night car show, the Disney and Universal parks, Strangers and Freaks side missions, and Vartan, the Armenian speed racer.
 
+The parks have rides, food carts, souvenir hats, character meets, wait-time boards, an afternoon parade and nightly fireworks. Seven shift jobs pay real money once per in-game day: churros, margaritas, popcorn, safari guide, two bars and street performing.
+
 The resort holds ten mini-games plus the full **BBA beer ball** league: 16 rated players, player cards, specials, house rules, floors and distractions, and **BBA Franchise** mode, with a draft, uniforms, a season, an All-Star Game, the playoffs, records and 21 awards.
 
 ## Play
