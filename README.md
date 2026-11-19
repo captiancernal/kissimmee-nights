@@ -10,6 +10,8 @@ Satire: an Annual Pass with Saturday blackouts, virtual queues, peak food pricin
 
 The resort holds ten mini-games plus the full **BBA beer ball** league: 16 rated players, player cards, specials, house rules, floors and distractions, and **BBA Franchise** mode, with a draft, uniforms, a season, an All-Star Game, the playoffs, records and 21 awards.
 
+**Aiming:** drag back to aim. The circle at the end of the line shows where the ball *could* land, not where it will. Hold still and the circle shrinks and turns green. Let go then for your best shot. Rush it or hold too long and the circle grows again. Better THROWING ratings get a smaller circle, less drift and a longer green window. Even a 95 lands about 7 in 10 perfect throws.
+
 All 16 BBA players also live in the world as story characters. Each has their own voiced side mission built around their badge or special. They unlock as the main story moves forward and show up as pink dots on the map. Matt pulls double duty. During the day he's Dr. Matt at Osceola General, and at night he's Crash Out at Heritage Park Arena. Everyone knows they're the same guy. He swears they aren't. You'll never see both at once, but stick around at shift change (or annoy him enough) and you'll catch the costume change, half-done every time. Every player you meet becomes a contact on your **phone**. The phone also has texts, the radio, your properties, the BBA league and save backup.
 
 ## Play
