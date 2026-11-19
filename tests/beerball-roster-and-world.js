@@ -2,7 +2,7 @@ require(__dirname+'/harness.js');
 G.startGame(false);step(20);const R=G.RG,GA=G.GAMES,B=G.BB,rn=(a,b)=>a+Math.random()*(b-a);
 function bb(n,opt,acc){G.S.mg={};G.mgGo(GA.bb,n,opt);const s=R.st;let g=0;while(s.ph!=='over'&&g++<90000){const p=B.cur(s);
   if(s.ph==='intro'&&s.t>.5)B.down(s,360,360);
-  if((s.ph==='ready'||s.ph==='aim')&&p.hum&&s.t>.3&&!s.ball){const tg=s.P[(1-p.tm)*2+(Math.random()*2|0)],o=B.org(p.tm),sw=B.sway(s,p),dx=(tg.x-o[0])/2.4+rn(-acc,acc)+sw[0]*rn(-.4,.4),dy=(tg.y-o[1])/2.4+rn(-acc,acc)+sw[1]*rn(-.4,.4),y0=p.tm?200:500;B.down(s,360,y0);B.move(s,360-dx,y0-dy);B.up(s,360-dx,y0-dy)}
+  if((s.ph==='ready'||s.ph==='aim')&&p.hum&&s.t>.3&&!s.ball){const tg=s.P[(1-p.tm)*2+(Math.random()*2|0)],o=B.org(p.tm),sw=B.sway(s,p),dx=(tg.x-o[0])/2.4+rn(-acc,acc)+sw[0]*rn(-.4,.4),dy=(tg.y-o[1])/2.4+rn(-acc,acc)+sw[1]*rn(-.4,.4),y0=p.tm?200:500;B.down(s,360,y0);B.move(s,360-dx,y0-dy);if(s.dr)s.dr.t=1.5*B.per(s,B.cur(s))+(Math.random()-.5)*.14;B.up(s,360-dx,y0-dy)}
   if(s.ph==='drink'){const tm=s.dtm,df=1-tm;R.ptr={};if(s.drk&&s.drk.hum&&s.gl[tm]<.8)R.ptr.h={x:360,y:tm?100:650};
    if(s.run&&s.P[df*2].hum&&s.ball&&s.t>.6&&g%6===0){const b=s.ball;if(s.run.st==='wait')B.down(s,b.x,b.y);else if(s.run.st==='back')B.down(s,360,df?250:470)}}else R.ptr={};
   G.mgTick(.033)}R.ptr={};return{ph:s.ph,secs:(g/30)|0,msg:s.msg,sum:s.sum,won:!!G.S.mg.bb}}
