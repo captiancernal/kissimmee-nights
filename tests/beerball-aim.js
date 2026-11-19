@@ -16,5 +16,9 @@ ok(pickN.every(n=>res[n][0]===100),'a perfect release hits every time, for every
 ok(res[pickN[0]][2]>res[pickN[4]][2]+15,'average timing: best thrower '+res[pickN[0]][2]+'% vs worst '+res[pickN[4]][2]+'%');
 ok(res[pickN[0]][2]<100,'even the best thrower can miss with average timing');
 // power: knock-over rate when the can is hit at full vs barely-held power
-const realPR=B.pR;B.pR=()=>0;let kf=0,kw=0,hf=0,hw=0;for(let i=0;i<400;i++){if(trial('Josh',null,1.2)){hf++;kf+=lastKo}if(trial('Josh',null,.25)){hw++;kw+=lastKo}}B.pR=realPR;
-console.log('knock-over rate on a hit: full power '+Math.round(kf/hf*100)+'%, weak power '+Math.round(kw/hw*100)+'%');ok(kf/hf>kw/hw+.12,'power drives the knock-over chance');
+const realPR=B.pR;B.pR=()=>0;const kr=n=>{let h=0,k=0;for(let i=0;i<900;i++)if(trial(n,null,1)){h++;k+=lastKo}return k/h};
+const byPow=G.BBN.map(n=>{G.mgGo(G.GAMES.bb,1,{t:[n,'Eric','Kait','Jill']});return[n,B.pwm(B.cur(R.st))]}).sort((a,b)=>b[1]-a[1]),hiP=byPow[0],loP=byPow[byPow.length-1];
+const kh=kr(hiP[0]),kl=kr(loP[0]);B.pR=realPR;
+console.log('knock-over rate on a perfect hit: '+hiP[0]+' (power '+Math.round(hiP[1]*100)+') '+Math.round(kh*100)+'%, '+loP[0]+' (power '+Math.round(loP[1]*100)+') '+Math.round(kl*100)+'%');
+ok(kh>kl+.06,'power rating drives the knock-over chance');
+G.mgGo(G.GAMES.bb,1,{t:['Josh','Eric','Kait','Jill']});{const p=B.cur(R.st);ok(B.pwm(p,0.1)===B.pwm(p,3),'power does not depend on how long you hold')}
